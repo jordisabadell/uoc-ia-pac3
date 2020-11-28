@@ -1,0 +1,121 @@
+{
+    "variables": [
+        {
+            "nom": "nivell_bruticia",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_poc(x)",
+                    "rangs":
+                    [
+                        {"valor": "-0,02x+1", "rang": "[0,50)"},
+                        {"valor": "0", "rang": "[50,100]"}
+                    ]
+                },
+                {
+                    "nom":"U_mig(x)",
+                    "rangs":
+                    [
+                        {"valor": "0,02x", "rang": "[0,50)"},
+                        {"valor": "-0,02x+2", "rang": "[50,100]"}
+                    ]
+                },
+                {
+                    "nom":"U_molt(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,50]"},
+                        {"valor": "0,02x-1", "rang": "[50,100]"}
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "nivell_greix",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_baix(x)",
+                    "rangs":
+                    [
+                        {"valor": "-0,05x+1", "rang": "[0,20)"},
+                        {"valor": "0", "rang": "[20,100]"}
+                    ]
+                },
+                {
+                    "nom":"U_mig(x)",
+                    "rangs":
+                    [
+                        {"valor": "0,05x", "rang": "[0,20)"},
+                        {"valor": "-0,0125x+1,25", "rang": "[20,100]"}
+                    ]
+                },
+                {
+                    "nom":"U_alt(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,20)"},
+                        {"valor": "0,0125x-0,25", "rang": "[20,100]"}
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "durada",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_curta(x)",
+                    "rangs":
+                    [
+                        {"valor": "1", "rang": "[0,30)"},
+                        {"valor": "-0,1x+4", "rang": "[30,40)"},
+                        {"valor": "0", "rang": "[40,90]"}                        
+                    ]
+                },
+                {
+                    "nom":"U_mitja(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,30)"},
+                        {"valor": "0,1x-3", "rang": "[30,40)"},
+                        {"valor": "1", "rang": "[40,50)"},
+                        {"valor": "-0,1x+6", "rang": "[50,60)"},
+                        {"valor": "0", "rang": "[60,90]"}
+                    ]
+                },
+                {
+                    "nom":"U_llarga(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,50)"},
+                        {"valor": "0,1x-5", "rang": "[50,60)"},
+                        {"valor": "1", "rang": "[60,70)"},
+                        {"valor": "-0,1x+8", "rang": "[70,80)"},
+                        {"valor": "0", "rang": "[80,90]"}
+                    ]
+                },
+                {
+                    "nom":"U_extra_llarga(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,70)"},
+                        {"valor": "-0,1x-7", "rang": "[70,80)"},
+                        {"valor": "1", "rang": "[80,90]"}
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "regles",
+            "regla": [
+                "si nivell_greix es baix i nivell_bruticia es poc llavors durada es curta",
+                "si nivell_greix es mig i nivell_bruticia es poc llavors durada es curta",
+                "si nivell_greix es alt i nivell_bruticia es poc llavors durada es llarga",
+                "si nivell_greix es baix i nivell_bruticia es mig llavors durada es mitja",
+                "si nivell_greix es mig i nivell_bruticia es mig llavors durada es mitja",
+                "si nivell_greix es alt i nivell_bruticia es mig llavors durada es llarga",
+                "si nivell_greix es baix i nivell_bruticia es molt llavors durada es llarga",
+                "si nivell_greix es mig i nivell_bruticia es molt llavors durada es llarga",
+                "si nivell_greix es alt i nivell_bruticia es molt llavors durada es extra_llarga"
+            ]
+        }
+    ]
+}
