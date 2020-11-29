@@ -1,0 +1,123 @@
+{
+    "variableA": {
+        "nom": "VarA",
+        "valor_entrada": "1.5"
+    },
+    "variableB": {
+        "nom": "VarB",
+        "valor_entrada": "0.9"
+    },
+    "variables": [
+        {
+            "nom": "VarA",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_VL(x)",
+                    "rangs":
+                    [
+                        {"rang": "[-2,-1]", "valor": "1"},
+                        {"rang": "[-1,2]", "valor": "-0,5x+0,5"},
+                        {"rang": "[1,8]", "valor": "0"}
+                    ]
+                },
+                {
+                    "nom":"U_L(x)",
+                    "rangs":
+                    [
+                        {"rang": "[-2,-1]", "valor": "0"},
+                        {"rang": "[-1,1]", "valor": "0,5x+0,5"},
+                        {"rang": "[1,4]", "valor": "-0,333x+1,333"},
+                        {"rang": "[4,8]", "valor": "0"}
+                    ]
+                },
+                {
+                    "nom":"U_M(x)",
+                    "rangs":
+                    [
+                        {"rang": "[-2,1]", "valor": "0"},
+                        {"rang": "[1,5]", "valor": "0,25x-0,25"},
+                        {"rang": "[5,6]", "valor": "-1x+6"},
+                        {"rang": "[6,8]", "valor": "0"}
+                    ]
+                },
+                {
+                    "nom":"U_H(x)",
+                    "rangs":
+                    [
+                        {"rang": "[-2,5]", "valor": "0"},
+                        {"rang": "[5,6]", "valor": "1x-5"},
+                        {"rang": "[6,7]", "valor": "-x+7"},
+                        {"rang": "[7,8]", "valor": "0"}
+                    ]
+                },
+                {
+                    "nom":"U_VH(x)",
+                    "rangs":
+                    [
+                        {"rang": "[-2,6]", "valor": "0"},
+                        {"rang": "[6,7]", "valor": "1x-6"},
+                        {"rang": "[7,8]", "valor": "1"}
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "VarB",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_L(x)",
+                    "rangs":
+                    [
+                        {"rang": "[0,0.2]", "valor": "5x"},
+                        {"rang": "[0.2,1.2]", "valor": "-1x+1,2"},
+                        {"rang": "[1.2,2]", "valor": "0"}
+                    ]
+                },
+                {
+                    "nom":"U_M(x)",
+                    "rangs":
+                    [
+                        {"rang": "[0,0.4]", "valor": "0"},
+                        {"rang": "[0.4,0.8]", "valor": "2x-1"},
+                        {"rang": "[0.8,1.4]", "valor": "-1,666x+2,333"},
+                        {"rang": "[1.4,2]", "valor": "0"}
+                    ]
+                },
+                {
+                    "nom":"U_H(x)",
+                    "rangs":
+                    [
+                        {"rang": "[0,0.8]", "valor": "0"},
+                        {"rang": "[0.8,1]", "valor": "5x-4"},
+                        {"rang": "[1,2]", "valor": "1"}
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "OutB1",
+            "funcio_pertinenca": [
+            ]
+        },
+        {
+            "nom": "regles",
+            "regla": [
+                "si VarA es VL i VarB es L llavors OutB1 es VL",
+                "si VarA es VL i VarB es M llavors OutB1 es VL",
+                "si VarA es VL i VarB es H llavors OutB1 es L",
+                "si VarA es L i VarB es L llavors OutB1 es L",
+                "si VarA es L i VarB es M llavors OutB1 es L",
+                "si VarA es L i VarB es H llavors OutB1 es M",
+                "si VarA es M i VarB es L llavors OutB1 es M",
+                "si VarA es M i VarB es M llavors OutB1 es M",
+                "si VarA es M i VarB es H llavors OutB1 es M",
+                "si VarA es H i VarB es L llavors OutB1 es L",
+                "si VarA es H i VarB es M llavors OutB1 es M",
+                "si VarA es H i VarB es H llavors OutB1 es H",
+                "si VarA es VH i VarB es L llavors OutB1 es H",
+                "si VarA es VH i VarB es M llavors OutB1 es VH",
+                "si VarA es VH i VarB es H llavors OutB1 es VH"
+            ]
+        }
+    ]
+}

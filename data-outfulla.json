@@ -1,0 +1,159 @@
+{
+    "variableA": {
+        "nom": "Hue",
+        "valor_entrada": "75"
+    },
+    "variableB": {
+        "nom": "Forma",
+        "valor_entrada": "3.2"
+    },
+    "variables": [
+        {
+            "nom": "Hue",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_Vermell(x)",
+                    "rangs":
+                    [
+                        {"valor": "1", "rang": "[0,10)"},
+                        {"valor": "-0,1x+2", "rang": "[10,20)"},
+                        {"valor": "0", "rang": "[20,300)"},
+                        {"valor": "(1/30)x-10", "rang": "[300,330]"},
+                        {"valor": "1", "rang": "(330,360]"}
+                    ]
+                },
+                {
+                    "nom":"U_Taronja(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,10)"},
+                        {"valor": "0,1x-1", "rang": "[10,20)"},
+                        {"valor": "1", "rang": "[20,40)"},
+                        {"valor": "-(1/15)x+(11/3)", "rang": "[40,55]"},
+                        {"valor": "0", "rang": "(55,360]"}
+                    ]
+                },
+                {
+                    "nom":"U_Verd(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,65)"},
+                        {"valor": "(1/15)x-(13/3)", "rang": "[65,80)"},
+                        {"valor": "1", "rang": "[80,140)"},
+                        {"valor": "-(1/30)x+(17/3)", "rang": "[140,170]"},
+                        {"valor": "0", "rang": "(170,360]"}
+                    ]
+                },
+                {
+                    "nom":"U_Cian(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,140)"},
+                        {"valor": "(1/30)x-(14/3)", "rang": "[140,170)"},
+                        {"valor": "1", "rang": "[170,200)"},
+                        {"valor": "-0,1x+21", "rang": "[200,210]"},
+                        {"valor": "0", "rang": "(210,360]"}
+                    ]
+                },
+                {
+                    "nom":"U_Blau(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,200)"},
+                        {"valor": "0,1x-20", "rang": "[200,210)"},
+                        {"valor": "1", "rang": "[210,250)"},
+                        {"valor": "-0,05x+13,5", "rang": "[250,270]"},
+                        {"valor": "0", "rang": "(270,360]"}
+                    ]
+                },
+                {
+                    "nom":"U_Porpa(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,250)"},
+                        {"valor": "0,05x-12,5", "rang": "[250,270)"},
+                        {"valor": "1", "rang": "[270,300)"},
+                        {"valor": "-(1/30)x+11", "rang": "[300,330]"},
+                        {"valor": "0", "rang": "(330,360]"}
+                    ]
+                },
+                {
+                    "nom":"U_Groc(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,40)"},
+                        {"valor": "(1/15)x-(8/3)", "rang": "[40,55)"},
+                        {"valor": "1", "rang": "[55,65)"},
+                        {"valor": "-(1/15)x+(16/3)", "rang": "[65,80]"},
+                        {"valor": "0", "rang": "(80,360]"}
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "Forma",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_Rodona(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "(5,10]"},
+                        {"valor": "-(1/3)x+(5/3)", "rang": "[2,5]"},
+                        {"valor": "1", "rang": "[0,2)"}
+                    ]
+                },
+                {
+                    "nom":"U_Mitja(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,2]"},
+                        {"valor": "(1/3)x-(2/3)", "rang": "(2,5]"},
+                        {"valor": "-(1/3)x+(8/3)", "rang": "(5,8)"},
+                        {"valor": "0", "rang": "[8,10]"}
+                    ]
+                },
+                {
+                    "nom":"U_Allargada(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,5)"},
+                        {"valor": "(1/3)x-(5/3)", "rang": "[5,8]"},
+                        {"valor": "1", "rang": "(8,10]"}
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "OutFullA",
+            "funcio_pertinenca": [
+
+            ]
+        },
+        {
+            "nom": "regles",
+            "regla": [
+                "si Hue es Vemell i Forma es Rodona llavors OutFulla es MA",
+                "si Hue es Vemell i Forma es Mitja llavors OutFulla es MA",
+                "si Hue es Vemell i Forma es Allargada llavors OutFulla es M",
+                "si Hue es Taronja i Forma es Rodona llavors OutFulla es B",
+                "si Hue es Taronja i Forma es Mitja llavors OutFulla es M",
+                "si Hue es Taronja i Forma es Allargada llavors OutFulla es M",
+                "si Hue es Groc i Forma es Rodona llavors OutFulla es M",
+                "si Hue es Groc i Forma es Mitja llavors OutFulla es B",
+                "si Hue es Groc i Forma es Allargada llavors OutFulla es B",
+                "si Hue es Verd i Forma es Rodona llavors OutFulla es MB",
+                "si Hue es Verd i Forma es Mitja llavors OutFulla es MB",
+                "si Hue es Verd i Forma es Allargada llavors OutFulla es MB",
+                "si Hue es Cian i Forma es Rodona llavors OutFulla es M",
+                "si Hue es Cian i Forma es Mitja llavors OutFulla es M",
+                "si Hue es Cian i Forma es Allargada llavors OutFulla es A",
+                "si Hue es Blau i Forma es Rodona llavors OutFulla es A",
+                "si Hue es Blau i Forma es Mitja llavors OutFulla es A",
+                "si Hue es Blau i Forma es Allargada llavors OutFulla es MA",
+                "si Hue es Porpa i Forma es Rodona llavors OutFulla es A",
+                "si Hue es Porpa i Forma es Mitja llavors OutFulla es MA",
+                "si Hue es Porpa i Forma es Allargada llavors OutFulla es MA"
+            ]
+        }
+    ]
+}

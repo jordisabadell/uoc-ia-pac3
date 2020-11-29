@@ -1,0 +1,99 @@
+{
+    "variableA": {
+        "nom": "Alcada",
+        "valor_entrada": "65"
+    },
+    "variableB": {
+        "nom": "Tronc",
+        "valor_entrada": "1.6"
+    },
+    "variables": [
+        {
+            "nom": "Alcada",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_Baix(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "(30,100]"},
+                        {"valor": "-0,1x+3", "rang": "[20,30]"},
+                        {"valor": "1", "rang": "[0, 20)"}                        
+                    ]
+                },
+                {
+                    "nom":"U_Mitja(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,20)"},
+                        {"valor": "0,1x-2", "rang": "[20,30)"},
+                        {"valor": "1", "rang": "[30,60)"},
+                        {"valor": "-0,05x+4", "rang": "[60,80)"},
+                        {"valor": "0", "rang": "[80,100]"}                        
+                    ]
+                },
+                {
+                    "nom":"U_Alt(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,60]"},
+                        {"valor": "0,05x-3", "rang": "(60,80]"},
+                        {"valor": "-0,05+5", "rang": "(80,100]"},
+                        {"valor": "0", "rang": "(100,100]"}                        
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "Tronc",
+            "funcio_pertinenca": [
+                {
+                    "nom":"U_Estret(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "(2.5,5]"},
+                        {"valor": "-0,4x+1", "rang": "[0,2.5]"},
+                        {"valor": "1", "rang": "[0,0)"}                        
+                    ]
+                },
+                {
+                    "nom":"U_Mitja(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,0]"},
+                        {"valor": "0,4x", "rang": "(0,2.5]"},
+                        {"valor": "-2x+6", "rang": "(2.5,3]"},
+                        {"valor": "0", "rang": "(3,5]"}                       
+                    ]
+                },
+                {
+                    "nom":"U_Ample(x)",
+                    "rangs":
+                    [
+                        {"valor": "0", "rang": "[0,2.5)"},
+                        {"valor": "2x-5", "rang": "[2.5,3]"},
+                        {"valor": "1", "rang": "(3,5]"}                        
+                    ]
+                }
+            ]
+        },
+        {
+            "nom": "OutPlanta",
+            "funcio_pertinenca": [
+            ]
+        },
+        {
+            "nom": "regles",
+            "regla": [
+                "si Alcada es Baix i Tronc es Estret llavors OutPlanta es B",
+                "si Alcada es Baix i Tronc es Mitja llavors OutPlanta es B",
+                "si Alcada es Baix i Tronc es Ample llavors OutPlanta es B",
+                "si Alcada es Mitja i Tronc es Estret llavors OutPlanta es B",
+                "si Alcada es Mitja i Tronc es Mitja llavors OutPlanta es M",
+                "si Alcada es Mitja i Tronc es Ample llavors OutPlanta es M",
+                "si Alcada es Alt i Tronc es Estret llavors OutPlanta es B",
+                "si Alcada es Alt i Tronc es Mitja llavors OutPlanta es M",
+                "si Alcada es Alt i Tronc es Ample llavors OutPlanta es A"
+            ]
+        }
+    ]
+}

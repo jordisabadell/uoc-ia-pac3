@@ -1,24 +1,25 @@
 import json
 
+DEBUG = True
 
 def executar_funcio(data, nom, valor):
 
     for v in data['variables']:
         if(v["nom"]==nom):
             
-            print("\n" + nom + " = " + str(valor))
+            if DEBUG: print("\n" + nom + " = " + str(valor))
             
-            resultats = {}        
+            resultats = {}
 
             #recórrer tots els rangs de la funció de pertinença
             for f in v["funcio_pertinenca"]:
                 x = float(valor)
 
-                print(f["nom"].replace("(x)", "(" + str(x)  + ")")) #nomenclatura: U_{nom variable}(x)
+                if DEBUG: print(f["nom"].replace("(x)", "(" + str(x)  + ")")) #nomenclatura: U_{nom variable}(x)
                 for r in f["rangs"]:
                     
                     #EXECUTAR LA REGLA
-                    
+                    #if DEBUG: print(r["rang"])
                     min = r["rang"].split(",")[0]
                     max = r["rang"].split(",")[1]
 
@@ -39,7 +40,7 @@ def executar_funcio(data, nom, valor):
                         elif(op_max=="<" and x<num_max):
                             compleix = True
                     
-                    print("\tsi " + str(num_min) + " " +  op_min + " " + str(x) 
+                    if DEBUG: print("\tsi " + str(num_min) + " " +  op_min + " " + str(x) 
                         + " " + op_max + " " + str(num_max) + " ? " 
                         + str(compleix))
 
@@ -51,8 +52,8 @@ def executar_funcio(data, nom, valor):
                             activa = True
                             nom = f["nom"].replace("U_", "").replace("(x)", "") #nomenclatura: U_{nom variable}(x)
                             resultats[nom] = resultat
-
-                        print("\t=> activa la regla? " + r["valor"] + "... = " + str(resultat) + " ? > 0 " + str(activa))
+                        
+                        if DEBUG: print("\t=> revisant si activa la regla? Avaluant y=" + r["valor"] + "=" + str(resultat) + " > 0? " + str(activa))
             return resultats;
 
 def regles_actives(data, nom_varA, resultats_varA, nom_varB, resultats_varB):
@@ -62,8 +63,9 @@ def regles_actives(data, nom_varA, resultats_varA, nom_varB, resultats_varB):
 
             resultats = {}
             
+            i=1
             for regla in v["regla"]:
-                print("\nAvaluant regla '" + regla + "'")
+                if DEBUG: print("\nAvaluant regla " + str(i) + " '" + regla + "'")
 
                 #per cada resultat de la variable A, recorrem els de la B
                 for resultat_varA in resultats_varA:
@@ -79,17 +81,22 @@ def regles_actives(data, nom_varA, resultats_varA, nom_varB, resultats_varB):
                             compleix = True
                             valorA = str(resultats_varA[resultat_varA])
                             valorB = str(resultats_varB[resultat_varB])
-                            valor = str(valorA) + ", " + str(valorB)
+                            valor = "min(" + str(valorA) + ", " + str(valorB) + ")"
                             valor_min = min(valorA, valorB)
 
+                            regla = str(i) + ": " + regla
+
                             resultats[regla] = valor_min
-                        print("\t" + condicio + " ? " + str(compleix) 
+                        if DEBUG: print("\t" + condicio + " ? " + str(compleix) 
                                 + " " + valor)
-                            
+                i=i+1    
             
             return resultats            
 
 def calcular_graus_activacio(regles):
+    
+    if DEBUG: print("\nCalculant graus d'activació: ")
+    
     valors = {}
     for regla in regles:
         resultat = regla.split('llavors')[1]
@@ -97,34 +104,40 @@ def calcular_graus_activacio(regles):
         
         #t-conorma max()
         if not resultat in valors:
+            if DEBUG: print("\tResultat " + str(resultat) + " repetit? False")
             valors[resultat] = regles[regla]
         else:
+            if DEBUG: print("\tResultat " + str(resultat) + " repetit? True max(" + str(valors[resultat]) + ", " + str(regles[regla]) + ")")
             if valors[resultat]<regles[regla]: #max
                 valors[resultat] = regles[regla]
     return valors
 
 # ------ main -------
 
-nivell_bruticia = 70
-nivell_greix = 50
-
-with open('data.json') as json_file:
+with open('data-outplanta.json') as json_file:
     data = json.load(json_file)
+
+    varA_nom = data["variableA"]["nom"]
+    varA_valor_entrada = data["variableA"]["valor_entrada"]
+
+    varB_nom = data["variableB"]["nom"]
+    varB_valor_entrada = data["variableB"]["valor_entrada"]
     
-    resultats_varA = executar_funcio(data, 'nivell_greix', nivell_greix)
-    print(resultats_varA)
+    print("\n# Valors que activen les variables:")
 
-    resultats_varB = executar_funcio(data, 'nivell_bruticia', nivell_bruticia)
-    print(resultats_varB)  
+    resultats_varA = executar_funcio(data, varA_nom, varA_valor_entrada)
+    print("\n# " + varA_nom + "=" + varA_valor_entrada + " activa " + str(resultats_varA))
 
-    resultats_regles = regles_actives(data, 'nivell_greix', resultats_varA, 
-        'nivell_bruticia', resultats_varB)
-    print("\nRegles a aplicar:")
+    resultats_varB = executar_funcio(data, varB_nom, varB_valor_entrada)
+    print("\n# " + varB_nom + "=" + varB_valor_entrada + " activa " + str(resultats_varB))
+
+    resultats_regles = regles_actives(data, varA_nom, resultats_varA, 
+        varB_nom, resultats_varB)
+    print("\n# Regles que s'activen aplicant 't-norma min':")
     for resultat_regla in resultats_regles:
-        print("\t" + resultat_regla + " " + str(resultats_regles[resultat_regla]))
-
+        print("\t" + resultat_regla + " {" + str(resultats_regles[resultat_regla]) + "}")
 
     graus = calcular_graus_activacio(resultats_regles)
-    print("Graus d'activació:")
+    print("\n# Termes que s'activen i nivell resultant aplicant t-conorma max:")
     for grau in graus:
         print("\t" + grau + " = " + graus[grau])

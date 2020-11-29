@@ -1,4 +1,12 @@
 {
+    "variableA": {
+        "nom": "nivell_greix",
+        "valor_entrada": "50"
+    },
+    "variableB": {
+        "nom": "nivell_bruticia",
+        "valor_entrada": "70"
+    },
     "variables": [
         {
             "nom": "nivell_bruticia",
